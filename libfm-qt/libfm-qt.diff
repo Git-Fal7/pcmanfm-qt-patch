@@ -1,0 +1,53 @@
+diff --git a/src/placesmodel.cpp b/src/placesmodel.cpp
+index 0eaf9fc..70ca914 100644
+--- a/src/placesmodel.cpp
++++ b/src/placesmodel.cpp
+@@ -41,12 +41,17 @@ PlacesModel::PlacesModel(QObject* parent):
+     trashMonitor_(nullptr),
+     trashUpdateTimer_(nullptr),
+     // FIXME: this seems to be broken when porting to new API.
+-    ejectIcon_(QIcon::fromTheme(QStringLiteral("media-eject"))) {
++    ejectIcon_(QIcon::fromTheme(QStringLiteral("media-eject"))),
++    placesIcon_(QIcon::fromTheme(QStringLiteral("folder"))),
++    devicesIcon_(QIcon::fromTheme(QStringLiteral("drive-harddisk"))),
++    bookmarksIcon_(QIcon::fromTheme(QStringLiteral("user-bookmarks")))
++    {
+     setColumnCount(2);
+ 
+     placesRoot = new QStandardItem(tr("Places"));
+     placesRoot->setSelectable(false);
+     placesRoot->setColumnCount(2);
++    placesRoot->setIcon(placesIcon_);
+     appendRow(placesRoot);
+ 
+     homeItem = new PlacesModelItem("user-home", QString::fromUtf8(g_get_user_name()), Fm::FilePath::homeDir());
+@@ -82,6 +87,7 @@ PlacesModel::PlacesModel(QObject* parent):
+     devicesRoot = new QStandardItem(tr("Devices"));
+     devicesRoot->setSelectable(false);
+     devicesRoot->setColumnCount(2);
++    devicesRoot->setIcon(devicesIcon_);
+     appendRow(devicesRoot);
+ 
+     // volumes
+@@ -137,6 +143,7 @@ PlacesModel::PlacesModel(QObject* parent):
+     bookmarksRoot = new QStandardItem(tr("Bookmarks"));
+     bookmarksRoot->setSelectable(false);
+     bookmarksRoot->setColumnCount(2);
++    bookmarksRoot->setIcon(bookmarksIcon_);
+     appendRow(bookmarksRoot);
+ 
+     bookmarks = Fm::Bookmarks::globalInstance();
+diff --git a/src/placesmodel.h b/src/placesmodel.h
+index e3b73a5..9df28bb 100644
+--- a/src/placesmodel.h
++++ b/src/placesmodel.h
+@@ -137,6 +137,9 @@ private:
+     PlacesModelItem* networkItem;
+     PlacesModelItem* applicationsItem;
+     QIcon ejectIcon_;
++    QIcon placesIcon_;
++    QIcon devicesIcon_;
++    QIcon bookmarksIcon_;
+     QList<GMount*> shadowedMounts_;
+ 
+     static std::weak_ptr<PlacesModel> globalInstance_;
