@@ -8,7 +8,7 @@ pkgrel=1
 pkgdesc="The LXQt file manager, Qt port of PCManFM, with QoL improvements"
 arch=("x86_64")
 groups=("lxqt")
-url="https://github.com/lxqt/$pkgname"
+url="https://github.com/lxqt/$_pkgfile"
 license=("GPL2")
 depends=("desktop-file-utils" "libfm-qt-patched" "lxmenu-data" "libfm-qt.so")
 makedepends=("lxqt-build-tools")
@@ -37,7 +37,7 @@ build() {
   cd "$srcdir/$_pkgfile-$pkgver"
   git apply "$srcdir"/pcmanfm-qt.diff
   cd ..
-	cmake -B build -S "$srcdir/$pkgname-$pkgver" \
+	cmake -B build -S "$srcdir/$_pkgfile-$pkgver" \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_BUILD_TYPE=None
 	make -C build
