@@ -12,7 +12,6 @@ url="https://github.com/lxqt/$_pkgfile"
 license=("GPL2")
 depends=("desktop-file-utils" "libfm-qt-patched" "lxmenu-data" "libfm-qt.so")
 makedepends=("lxqt-build-tools")
-conflicts("pcmanfm-qt")
 optdepends=(
 	"gvfs: for various features like mounting without root, remote filesystems, encrypted filesystems and many others mentioned on https://github.com/lxqt/pcmanfm-qt/wiki"
 	"gvfs-mtp: MTP support (Media Transfer Protocol)"
