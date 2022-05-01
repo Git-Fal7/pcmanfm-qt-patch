@@ -9,13 +9,12 @@ pkgdesc="Core library of PCManFM-Qt (Qt binding for libfm)"
 arch=("x86_64")
 url="https://github.com/lxqt/$_pkgfile"
 license=("LGPL2.1")
-replaces=('libfm-qt')
 depends=("menu-cache" "libexif" "qt5-x11extras")
 makedepends=("lxqt-build-tools")
 optdepends=(
   "org.freedesktop.secrets: allow to remember mount passwords"
 )
-provides=("libfm-qt.so")
+provides=("libfm-qt.so" "libfm-qt")
 source=(
 	"https://github.com/lxqt/$_pkgfile/releases/download/$pkgver/$_pkgfile-$pkgver.tar.xz"
   "libfm-qt.diff"
