@@ -1,0 +1,46 @@
+# Maintainer: Jerome Leclanche <jerome@leclan.ch>
+# Maintainer: Chih-Hsuan Yen <yan12125@archlinux.org>
+
+pkgname=libfm-qt-patched
+_pkgfile=libfm-qt
+pkgver=1.1.0
+pkgrel=1
+pkgdesc="Core library of PCManFM-Qt (Qt binding for libfm)"
+arch=("x86_64")
+url="https://github.com/lxqt/$_pkgfile"
+license=("LGPL2.1")
+depends=("menu-cache" "libexif" "qt5-x11extras")
+makedepends=("lxqt-build-tools")
+optdepends=(
+  "org.freedesktop.secrets: allow to remember mount passwords"
+)
+provides=("libfm-qt.so")
+source=(
+	"https://github.com/lxqt/$_pkgfile/releases/download/$pkgver/$_pkgfile-$pkgver.tar.xz"
+	"https://github.com/lxqt/$_pkgfile/releases/download/$pkgver/$_pkgfile-$pkgver.tar.xz.asc"
+  "libfm-qt.diff"
+)
+sha512sums=('6717bc3fd3a2795389071e4dbfba2e73f3abfeafce8a583f99b3281e60347430db48246eb29796c5b7647b35b064824e90fc3a286547288798a1c6da3a3f5137'
+            'SKIP'
+            'SKIP')
+validpgpkeys=(
+	"169704C6FB490C6892C7F23C37E0AF1FDA48F373"  # Jerome Leclanche <jerome@leclan.ch>
+	"7C733BA5F585AAD669E4D23A42C9C8D3AF5EA5E3"  # Alf Gaida <agaida@siduction.org>
+	"19DFDF3A579BD509DBB572D8BE793007AD22DF7E"  # Pedram Pourang <tsujan2000@gmail.com>
+)
+
+
+build() {
+  cd "$srcdir/$_pkgfile-$pkgver"
+  git apply "$srcdir"/libfm-qt.diff
+  cd ..
+	cmake -B build -S "$srcdir/$_pkgfile-$pkgver" \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_BUILD_TYPE=None
+	make -C build
+}
+
+package() {
+	cd build
+	make DESTDIR="$pkgdir" install
+}
