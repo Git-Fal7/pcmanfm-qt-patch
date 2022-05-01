@@ -1,0 +1,44 @@
+diff --git a/pcmanfm/main-win.ui b/pcmanfm/main-win.ui
+index acb04c2..8f0e50c 100644
+--- a/pcmanfm/main-win.ui
++++ b/pcmanfm/main-win.ui
+@@ -263,17 +263,11 @@
+    <attribute name="toolBarBreak">
+     <bool>false</bool>
+    </attribute>
+-   <addaction name="actionNewTab"/>
+    <addaction name="actionGoBack"/>
+    <addaction name="actionGoForward"/>
+    <addaction name="actionGoUp"/>
+    <addaction name="actionReload"/>
+    <addaction name="separator"/>
+-   <addaction name="actionIconView"/>
+-   <addaction name="actionThumbnailView"/>
+-   <addaction name="actionCompactView"/>
+-   <addaction name="actionDetailedList"/>
+-   <addaction name="separator"/>
+    <addaction name="actionGo"/>
+    <addaction name="actionMenu"/>
+   </widget>
+diff --git a/pcmanfm/settings.cpp b/pcmanfm/settings.cpp
+index ae048f9..bf7f9a1 100644
+--- a/pcmanfm/settings.cpp
++++ b/pcmanfm/settings.cpp
+@@ -96,7 +96,7 @@ Settings::Settings():
+     splitterPos_(120),
+     sidePaneVisible_(true),
+     sidePaneMode_(Fm::SidePane::ModePlaces),
+-    showMenuBar_(true),
++    showMenuBar_(false),
+     splitView_(false),
+     viewMode_(Fm::FolderView::IconMode),
+     showHidden_(false),
+@@ -337,7 +337,7 @@ bool Settings::loadFile(QString filePath) {
+     splitterPos_ = settings.value(QStringLiteral("SplitterPos"), 150).toInt();
+     sidePaneVisible_ = settings.value(QStringLiteral("SidePaneVisible"), true).toBool();
+     sidePaneMode_ = sidePaneModeFromString(settings.value(QStringLiteral("SidePaneMode")).toString());
+-    showMenuBar_ = settings.value(QStringLiteral("ShowMenuBar"), true).toBool();
++    showMenuBar_ = settings.value(QStringLiteral("ShowMenuBar"), false).toBool();
+     splitView_ = settings.value(QStringLiteral("SplitView"), false).toBool();
+     pathBarButtons_ = settings.value(QStringLiteral("PathBarButtons"), true).toBool();
+     settings.endGroup();
