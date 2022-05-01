@@ -21,17 +21,10 @@ optdepends=(
 )
 source=(
 	"https://github.com/lxqt/$_pkgfile/releases/download/$pkgver/$_pkgfile-$pkgver.tar.xz"
-	"https://github.com/lxqt/$_pkgfile/releases/download/$pkgver/$_pkgfile-$pkgver.tar.xz.asc"
-  "pcmanfm-qt.diff"
+ "pcmanfm-qt.diff"
 )
 sha256sums=('09e62a70aabd4eb4c1942b0dc4a24051d09510de0a5e8370dd06e9358b14945f'
-            'SKIP'
             'SKIP')
-validpgpkeys=(
-	"169704C6FB490C6892C7F23C37E0AF1FDA48F373"  # Jerome Leclanche <jerome@leclan.ch>
-	"7C733BA5F585AAD669E4D23A42C9C8D3AF5EA5E3"  # Alf Gaida <agaida@siduction.org>
-	"19DFDF3A579BD509DBB572D8BE793007AD22DF7E"  # Pedram Pourang <tsujan2000@gmail.com>
-)
 
 build() {
   cd "$srcdir/$_pkgfile-$pkgver"
