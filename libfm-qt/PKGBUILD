@@ -24,7 +24,7 @@ sha512sums=('6717bc3fd3a2795389071e4dbfba2e73f3abfeafce8a583f99b3281e60347430db4
 
 build() {
   cd "$srcdir/$_pkgfile-$pkgver"
-  git apply "$srcdir"/libfm-qt.diff
+  patch -Np1 -i ../libfm-qt.diff
   cd ..
 	cmake -B build -S "$srcdir/$_pkgfile-$pkgver" \
 		-DCMAKE_INSTALL_PREFIX=/usr \
